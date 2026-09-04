@@ -7,7 +7,7 @@ namespace CatchLightning.Core.Infrastructure
     
     internal class SqliteContext : DbContext
     {
-        private AppConfig _config;
+        private IConfig _config;
         private string? connectionString;
 
         public DbSet<Models.Category> Categories { get; set; }
@@ -15,7 +15,7 @@ namespace CatchLightning.Core.Infrastructure
         public DbSet<Models.Achievement> Achivments { get; set; }
 
 
-        public SqliteContext(AppConfig config)
+        public SqliteContext(IConfig config)
         {
             _config = config;
         }
@@ -38,7 +38,7 @@ namespace CatchLightning.Core.Infrastructure
 
             if (connectionString == null || connectionString == "")
             {
-                connectionString = Path.Join(Directory.GetCurrentDirectory(), "sqlite.db");
+                connectionString = $"DataSource={Directory.GetCurrentDirectory()}/sqlite.db";
                 _config.SetConnectionString(connectionString);
             }
 
