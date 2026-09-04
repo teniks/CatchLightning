@@ -2,10 +2,10 @@
 
 namespace CatchLightning.Core.Models
 {
-    internal class Achievement
+    internal class Achievement: IModel
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string Name { get; set; }
         public string? Description { get; set; }
         public AchievementLevel Level { get; set; }
         public bool IsComplited { get; set; } 
