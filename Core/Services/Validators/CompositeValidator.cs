@@ -1,7 +1,6 @@
 ﻿using CatchLightning.Core.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CatchLightning.Core.Services.Validators
