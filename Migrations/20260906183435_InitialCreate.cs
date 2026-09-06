@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -31,7 +32,6 @@ namespace CatchLightning.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    IdCategory = table.Column<int>(type: "INTEGER", nullable: true),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -50,14 +50,12 @@ namespace CatchLightning.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Level = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsComplited = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DateComplited = table.Column<string>(type: "TEXT", nullable: true),
-                    IdGoal = table.Column<int>(type: "INTEGER", nullable: true),
+                    IsCompleted = table.Column<bool>(type: "INTEGER", nullable: false),
+                    DateCompleted = table.Column<DateTime>(type: "TEXT", nullable: true),
                     GoalId = table.Column<int>(type: "INTEGER", nullable: true),
-                    IdCategory = table.Column<int>(type: "INTEGER", nullable: true),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -79,30 +77,30 @@ namespace CatchLightning.Migrations
                 name: "AchievementAchievement",
                 columns: table => new
                 {
-                    DependentsId = table.Column<int>(type: "INTEGER", nullable: false),
-                    СonditionsId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ConditionsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DependentsId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AchievementAchievement", x => new { x.DependentsId, x.СonditionsId });
+                    table.PrimaryKey("PK_AchievementAchievement", x => new { x.ConditionsId, x.DependentsId });
+                    table.ForeignKey(
+                        name: "FK_AchievementAchievement_Achivments_ConditionsId",
+                        column: x => x.ConditionsId,
+                        principalTable: "Achivments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AchievementAchievement_Achivments_DependentsId",
                         column: x => x.DependentsId,
                         principalTable: "Achivments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AchievementAchievement_Achivments_СonditionsId",
-                        column: x => x.СonditionsId,
-                        principalTable: "Achivments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AchievementAchievement_СonditionsId",
+                name: "IX_AchievementAchievement_DependentsId",
                 table: "AchievementAchievement",
-                column: "СonditionsId");
+                column: "DependentsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Achivments_CategoryId",

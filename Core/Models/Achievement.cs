@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CatchLightning.Core.Models
 {
@@ -8,17 +9,17 @@ namespace CatchLightning.Core.Models
         public string Name { get; set; }
         public string? Description { get; set; }
         public AchievementLevel Level { get; set; }
-        public bool IsComplited { get; set; } 
-        public string? DateComplited { get; set; }
+        public bool IsCompleted { get; set; } 
+        public DateTime? DateCompleted { get; set; }
 
-        public int? IdGoal { get; set; }
+        public int? GoalId { get; set; }
         public Goal? Goal { get; set; }
 
-        public int? IdCategory { get; set; }
+        public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        public List<Achievement> Сonditions { get; } = new ();
-        public List<Achievement> Dependents { get; } = new();
+        public List<Achievement> Conditions { get; } = new ();
+        public List<Achievement> Dependents { get; } = new ();
         
     }
 }

@@ -8,9 +8,9 @@ namespace CatchLightning.Core.Models
         public string Name { get; set; }
         public string? Description { get; set; }
 
-        public int? IdCategory { get; set; }
+        public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        public List<Achievement> Achivments { get; } = new();
+        public List<Achievement> Achievements { get; } = new();
     }
 }
