@@ -2,7 +2,7 @@
 
 namespace CatchLightning.Core.Models
 {
-    internal class Achievement: IModel
+    internal class Achievement: IHasName
     {
         public int Id { get; set; }
         public string Name { get; set; }
