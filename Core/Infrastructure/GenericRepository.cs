@@ -1,6 +1,7 @@
 ﻿using CatchLightning.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace CatchLightning.Core.Infrastructure
             return await dbSet.FindAsync(id);
         }
 
-        public async Task<IQueryable<T>> GetPartFromAsync(int count, int skip = 0)
+        public async Task<IEnumerable<T>> GetPartFromAsync(int count, int skip = 0)
         {
             return await Task.FromResult(dbSet.Skip(skip).Take(count));
         }
@@ -33,23 +34,23 @@ namespace CatchLightning.Core.Infrastructure
             return await dbSet.FirstOrDefaultAsync(x => x.Name.Contains(name));
         }
 
-        public async Task Add(T entity)
+        public async Task AddAsync(T entity)
         {
             await dbSet.AddAsync(entity);
         }
 
-        public async Task Update(T entity)
+        public void Update(T entity)
         {
             dbSet.Update(entity);
         }
 
         public void Delete(T entity) {
-            dbSet.Remove(entity);
+           dbSet.Remove(entity);
         }
 
-        public void SaveChanges()
+        public async Task SaveChangesAsync()
         {
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public void Dispose()
