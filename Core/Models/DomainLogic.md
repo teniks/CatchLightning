@@ -21,6 +21,7 @@ Achievement {
 Goal {
     int ID PK
     string Name
+    int Category FK
 }
 
 Category {

@@ -26,12 +26,15 @@ CatchLighning
 │
 ├─Core
 │   │
-│   ├─Models                : Объекты передачи данных. [UML schema](./Core/Models/DomainLogic.md)
+│   ├─Models                : Объекты передачи данных. 
 │   │
 │   ├─Infrastructure        : Обеспечение обработки и хранения данных
 │   │
 │   └─Services              : Бизнес-логика работы с данными
 ```
+
+Описание уровня [Models](./Core/Models/DomainLogic.md)
+
 
 - MVVM шаблон проектирования.
 - Конфигурация через JSON.
