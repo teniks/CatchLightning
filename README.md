@@ -26,8 +26,16 @@ _Достижения_ - каждое со своим названием, опи
 5. Смена темы (светлая/тёмная) с сохранением.
 6. Экспорт/импорт данных в JSON.
 7. Клиент для синхронизации с удалённым REST API (для демонстрации понимания клиент-серверного взаимодействия).
-8. Unit-тесты для ViewModel.
 9. Глобальный обработчик ошибок и логирование.
+
+### Статус проекта
+
+- [x] Конфигурация настроек через JSON.
+- [x] Code First база данных SQLite через Entity Framework Core.
+- [ ] MVVM шаблон проектирования.
+- [ ] Avalonia UI.
+- [ ] Логирование.
+- [ ] HTTP-взаимодействие.
 
 ## Структура
 
@@ -48,12 +56,21 @@ CatchLighning
 Описание уровня [Models](./Core/Models/DomainLogic.md)
 
 
-### Статус проекта
+## Зависимости
 
-- [x] Конфигурация настроек через JSON.
-- [x] Code First база данных SQLite через Entity Framework Core.
-- [ ] MVVM шаблон проектирования.
-- [ ] Avalonia UI.
-- [ ] Логирование.
-- [ ] Тестирование.
-- [ ] HTTP-взаимодействие.
+**Фреймворк:** .NET 10.0
+
+**Пользовательский интерфейс (Avalonia):**
+- `Avalonia` – кроссплатформенный UI-фреймворк
+- `Avalonia.Desktop` – поддержка десктопных платформ
+- `Avalonia.Themes.Fluent` – тема оформления Fluent
+- `Avalonia.Fonts.Inter` – встроенный шрифт Inter
+- `AvaloniaUI.DiagnosticsSupport` – диагностика (только для Debug)
+
+**Доступ к данным:**
+- `Microsoft.EntityFrameworkCore.Sqlite` – провайдер EF Core для SQLite
+- `Microsoft.EntityFrameworkCore.Tools` – инструменты для миграций
+
+**Конфигурация:**
+- `Microsoft.Extensions.Configuration.Json` – чтение `appsettings.json`
+- `Microsoft.Extensions.Configuration.EnvironmentVariables` – чтение переменных окружения
