@@ -34,7 +34,7 @@ namespace CatchLightning.Core.Infrastructure
             (await dbSet.FirstOrDefaultAsync(x => x.Equals(current)))?.CategoryId = category.Id;
         }
 
-        public async Task<IEnumerable<Achievement>> GetByFilter(AchievementFilter filter, int count = 30, int skip = 0)
+        public async Task<List<Achievement>> GetByFilter(AchievementFilter filter, int count = 30, int skip = 0)
         {
             IQueryable<Achievement> query = dbSet;
 
