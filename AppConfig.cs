@@ -1,16 +1,17 @@
 ﻿using CatchLightning.Core.Infrastructure;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
 
 namespace CatchLightning
 {
     internal class AppConfig : IConfig
     {
-        private IConfiguration configuration; 
-        public AppConfig() 
+        private IConfiguration configuration;
+        public AppConfig()
         {
             configuration = new ConfigurationBuilder()
-                .AddJsonFile(Path.Join(Directory.GetCurrentDirectory(), "appsettings.json"), 
+                .AddJsonFile(Path.Combine(AppContext.BaseDirectory, "appsettings.json"),
                 optional: false, reloadOnChange: true)
                 .Build();
         }

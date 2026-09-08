@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CatchLightning.Core.Services.Validators
+﻿namespace CatchLightning.Core.Services.Validators
 {
     internal enum AchievementError
     {

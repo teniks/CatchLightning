@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CatchLightning.Core.Models
+﻿namespace CatchLightning.Core.Models
 {
     /// <summary>
     /// Every model has a name property.

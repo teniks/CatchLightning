@@ -3,7 +3,6 @@ using CatchLightning.Core.Models;
 using CatchLightning.Core.Services.Validators;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CatchLightning.Core.Services

@@ -50,4 +50,4 @@ namespace CatchLightning.Core.Infrastructure
             return await query.Skip(skip).Take(count).ToListAsync();
         }
     }
-} 
+}

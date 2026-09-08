@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CatchLightning.Core.Infrastructure
+﻿namespace CatchLightning.Core.Infrastructure
 {
     internal interface IConfig
     {

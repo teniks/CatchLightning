@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CatchLightning.Core.Infrastructure
 {
-    internal class GenericRepository<T>: IDisposable, IFindByName<T>
+    internal class GenericRepository<T> : IDisposable, IFindByName<T>
         where T : class, IHasName
     {
         protected DbContext context;
@@ -44,8 +44,9 @@ namespace CatchLightning.Core.Infrastructure
             dbSet.Update(entity);
         }
 
-        public void Delete(T entity) {
-           dbSet.Remove(entity);
+        public void Delete(T entity)
+        {
+            dbSet.Remove(entity);
         }
 
         public async Task SaveChangesAsync()

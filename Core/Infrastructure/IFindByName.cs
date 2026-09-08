@@ -9,6 +9,6 @@ namespace CatchLightning.Core.Infrastructure
     /// <typeparam name="T"></typeparam>
     internal interface IFindByName<TEntity> where TEntity : class, IHasName
     {
-         Task<TEntity?> GetByNameAsync(string name);
+        Task<TEntity?> GetByNameAsync(string name);
     }
 }

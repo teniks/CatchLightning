@@ -2,7 +2,7 @@
 
 namespace CatchLightning.Core.Models
 {
-    internal class Goal: IHasName
+    internal class Goal : IHasName
     {
         public int Id { get; set; }
         public string Name { get; set; }
