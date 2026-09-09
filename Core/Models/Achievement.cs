@@ -9,7 +9,7 @@ namespace CatchLightning.Core.Models
         public string Name { get; set; }
         public string? Description { get; set; }
         public AchievementLevel Level { get; set; }
-        public bool IsCompleted { get; set; }
+        public bool IsCompleted { get; set; } = false;
         public DateTime? DateCompleted { get; set; }
 
         public int? GoalId { get; set; }
