@@ -1,14 +1,27 @@
-﻿using System;
+﻿using Avalonia.Threading;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CatchLightning.features.Dashboard.NavigationPanel
 {
-    public class NavigationTree : IDisposable
+    public class NavigationTree : IDisposable, INotifyPropertyChanged
     {
-        public ObservableCollection<NavigationPath> NavigationPaths { get; } = new();
+        //TODO: implement a snapshot pattern for NavigationPaths to stabilize data changes
+        public ObservableCollection<NavigationPath> _navigationPaths = new();
+        public ObservableCollection<NavigationPath> NavigationPaths
+        {
+            get => _navigationPaths;
+            set
+            {
+                _navigationPaths = value;
+                RaisePropertyChanged(nameof(NavigationPaths));
+            }
+        }
         private CancellationTokenSource loadCancellationTokenSource { get; set; } = new();
         private bool _isLoading = false;
         private bool _disposed = false;
@@ -18,6 +31,14 @@ namespace CatchLightning.features.Dashboard.NavigationPanel
         /// Async data event = <see cref="IsLoading"/>
         /// </summary>
         public event EventHandler? IsLoadingChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+
+        public void RaisePropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
         public bool IsLoading
         {
             get => _isLoading;
@@ -30,8 +51,6 @@ namespace CatchLightning.features.Dashboard.NavigationPanel
                 IsLoadingChanged?.Invoke(this, EventArgs.Empty);
             }
         }
-
-
 
         public void AddNavigationPath(NavigationPath path)
         {
@@ -76,12 +95,10 @@ namespace CatchLightning.features.Dashboard.NavigationPanel
         /// <param name="newPaths"></param>
         public void ReplacePath(IReadOnlyCollection<NavigationPath> newPaths)
         {
-            lock(gate)
+            Dispatcher.UIThread.Post(() =>
             {
-                NavigationPaths.Clear();
-                foreach (var path in newPaths)
-                    NavigationPaths.Add(path);
-            }
+                NavigationPaths = new(newPaths);
+            });
         }
 
         public void Dispose()
