@@ -1,6 +1,6 @@
 ﻿namespace CatchLightning.Core.Services.Validators
 {
-    internal enum AchievementError
+    public enum AchievementError
     {
         NameRequired,
         NameDuplicated,
@@ -8,13 +8,13 @@
         CategoryNotFound
     }
 
-    internal enum CategoryError
+    public enum CategoryError
     {
         NameRequired,
         NameDuplicated,
     }
 
-    internal enum GoalError
+    public enum GoalError
     {
         NameRequired,
         NameDuplicated,

@@ -1,9 +1,11 @@
 ﻿
+using CatchLightning.Core.Abstractions;
+
 namespace CatchLightning.Core.Models
 {
-    internal class Category : IHasName
+    public class Category : IEntity
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
         public string Name { get; set; }
     }
 }

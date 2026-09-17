@@ -1,4 +1,5 @@
-﻿using CatchLightning.Core.Models;
+﻿using CatchLightning.Core.Abstractions;
+using CatchLightning.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 

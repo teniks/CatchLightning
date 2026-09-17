@@ -2,7 +2,7 @@
 
 namespace CatchLightning.Core.Services.Validators
 {
-    internal interface IValidator<TEntity, TEnumErrors>
+    public interface IValidator<TEntity, TEnumErrors>
     {
         Task<TEnumErrors?> Validate(TEntity entity);
     }

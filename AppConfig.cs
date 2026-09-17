@@ -1,4 +1,4 @@
-﻿using CatchLightning.Core.Infrastructure;
+﻿using CatchLightning.Core.Abstractions;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;

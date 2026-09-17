@@ -1,5 +1,5 @@
-﻿using CatchLightning.Core.Infrastructure;
-using CatchLightning.Core.Models;
+﻿using CatchLightning.Core.Abstractions;
+using CatchLightning.Core.Infrastructure;
 using CatchLightning.Core.Services.Validators;
 using System;
 using System.Collections.Generic;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CatchLightning.Core.Services
 {
-    internal abstract class EntityService<TEntity, TEnumErrors>
-        where TEntity : class, IHasName
+    public abstract class EntityService<TEntity, TEnumErrors>
+        where TEntity : class, IEntity
         where TEnumErrors : Enum
     {
         protected GenericRepository<TEntity> repository;

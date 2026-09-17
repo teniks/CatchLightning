@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CatchLightning.Core.Abstractions;
+using System;
 using System.Collections.Generic;
 
 namespace CatchLightning.Core.Models
 {
-    internal class Achievement : IHasName
+    public class Achievement : IEntity
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
         public string Name { get; set; }
         public string? Description { get; set; }
         public AchievementLevel Level { get; set; }

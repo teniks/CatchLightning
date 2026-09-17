@@ -1,12 +1,11 @@
-﻿using CatchLightning.Core.Infrastructure;
-using CatchLightning.Core.Models;
+﻿using CatchLightning.Core.Abstractions;
 using System;
 using System.Threading.Tasks;
 
 namespace CatchLightning.Core.Services.Validators
 {
     internal class UniqueNameValidator<TEntity, TEnumErrors> : IValidator<TEntity, TEnumErrors>
-        where TEntity : class, IHasName
+        where TEntity : class, IEntity
         where TEnumErrors : Enum
     {
         private IFindByName<TEntity> _finder;

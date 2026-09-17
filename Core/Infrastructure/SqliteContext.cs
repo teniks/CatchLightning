@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CatchLightning.Core.Abstractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace CatchLightning.Core.Infrastructure
 {

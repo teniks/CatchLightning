@@ -1,4 +1,5 @@
-﻿using CatchLightning.Core.Models;
+﻿using CatchLightning.Core.Abstractions;
+using CatchLightning.Core.Models;
 using CatchLightning.Core.Models.Filters;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

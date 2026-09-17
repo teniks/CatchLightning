@@ -1,4 +1,4 @@
-﻿namespace CatchLightning.Core.Infrastructure
+﻿namespace CatchLightning.Core.Abstractions
 {
     internal interface IConfig
     {

@@ -2,7 +2,7 @@
 
 namespace CatchLightning.Core.Services
 {
-    internal class OperationResult<TEnumErrors> where TEnumErrors : Enum
+    public class OperationResult<TEnumErrors> where TEnumErrors : Enum
     {
         public bool IsSuccess { get; private set; }
         public TEnumErrors? Error { get; private set; }

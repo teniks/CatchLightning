@@ -1,7 +1,7 @@
 ﻿
 namespace CatchLightning.Core.Models
 {
-    internal enum AchievementLevel
+    public enum AchievementLevel
     {
         Common = 0,
         Uncommon = 1,

@@ -1,4 +1,4 @@
-﻿using CatchLightning.Core.Models;
+﻿using CatchLightning.Core.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace CatchLightning.Core.Services.Validators
 {
     internal class CompositeValidator<TEntity, TEnumErrors> : IValidator<TEntity, TEnumErrors>
-        where TEntity : class, IHasName
+        where TEntity : class, IEntity
         where TEnumErrors : Enum
     {
         private readonly IEnumerable<IValidator<TEntity, TEnumErrors>> _validators;

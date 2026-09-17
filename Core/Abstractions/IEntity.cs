@@ -1,10 +1,11 @@
-﻿namespace CatchLightning.Core.Models
+﻿namespace CatchLightning.Core.Abstractions
 {
     /// <summary>
     /// Every model has a name property.
     /// </summary>
-    internal interface IHasName
+    public interface IEntity
     {
+        public int Id { get; init; }
         public string Name { get; set; }
     }
 }

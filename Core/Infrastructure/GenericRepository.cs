@@ -1,4 +1,4 @@
-﻿using CatchLightning.Core.Models;
+﻿using CatchLightning.Core.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CatchLightning.Core.Infrastructure
 {
-    internal class GenericRepository<T> : IDisposable, IFindByName<T>
-        where T : class, IHasName
+    public class GenericRepository<T> : IDisposable, IFindByName<T>
+        where T : class, IEntity
     {
         protected DbContext context;
         protected DbSet<T> dbSet;

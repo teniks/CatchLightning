@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using CatchLightning.features.Dashboard.Model;
 
 namespace CatchLightning;
 

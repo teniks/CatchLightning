@@ -2,8 +2,42 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:categoryM="using:CatchLightning.features.Dashboard.Achievement.Model"
+        xmlns:categoryV="using:CatchLightning.features.Dashboard.Achievement.Presentation"
+        xmlns:navPanel="using:CatchLightning.features.Dashboard.NavigationPanel"
+        xmlns:navigationpanel="using:CatchLightning.features.Dashboard.NavigationPanel"
+        xmlns:model="using:CatchLightning.features.Dashboard.Model"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="CatchLightning.MainWindow"
-        Title="CatchLightning">
-    Welcome to Avalonia!
+        x:DataType="model:MainWindowViewModel"
+        WindowStartupLocation="CenterScreen"
+        Title="Catch The Lightning">
+
+    <Window.DataTemplates>
+        <DataTemplate DataType="categoryM:CategoryPageViewModel">
+            <categoryV:CategoryPage/>
+        </DataTemplate>
+    </Window.DataTemplates>
+    
+    <Grid ColumnDefinitions="Auto, Auto, *">
+        
+        <Border Grid.Column="0" Background="LightGray" Width="200">
+            <ListBox Name="NavigationPathList" ItemsSource="{Binding NavigationTree.NavigationPaths}"
+                     SelectedIndex="{Binding SelectedIndex}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="navigationpanel:NavigationPath">
+                        
+                        <TextBlock Text="{Binding Name}"
+                                   Margin="{Binding Margin}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <Rectangle Grid.Column="1"
+                   VerticalAlignment="Stretch"
+                   Fill="LightGray" Width="1" />
+
+        <ContentPage Grid.Column="2" Content="{Binding CurrentPage}"/>
+    </Grid>
 </Window>
