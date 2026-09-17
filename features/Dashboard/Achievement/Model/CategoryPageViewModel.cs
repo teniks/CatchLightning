@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CatchLightning.features.Dashboard.Achievement.Model
 {
@@ -36,7 +35,7 @@ namespace CatchLightning.features.Dashboard.Achievement.Model
                 if (value == _selectedCategory) return;
 
                 _selectedCategory = value;
-                OnPropertyChanged(nameof(SelectedCategory));
+                RaisePropertyChanged(nameof(SelectedCategory));
                 value?.Command.Execute(null);
             }
         }

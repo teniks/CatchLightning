@@ -21,7 +21,7 @@ namespace CatchLightning.features.Dashboard.Model
             set
             {
                 selectedIndex = value;
-                OnPropertyChanged(nameof(SelectedIndex));
+                RaisePropertyChanged(nameof(SelectedIndex));
 
                 if (value < 0 || value >= NavigationTree.NavigationPaths.Count) return;
 
@@ -42,7 +42,7 @@ namespace CatchLightning.features.Dashboard.Model
             set
             {
                 _currentPage = value;
-                OnPropertyChanged(nameof(CurrentPage));
+                RaisePropertyChanged(nameof(CurrentPage));
             }
         }
         
@@ -91,9 +91,9 @@ namespace CatchLightning.features.Dashboard.Model
         {
             var olditems = NavigationTree.NavigationPaths.ToArray();
             List<NavigationPath> items = new();
-            
 
-            for (int i = 0; i < index; i++)
+            int max = Math.Max(0, Math.Min(index, olditems.Length));
+            for (int i = 0; i < max; i++)
             {
                 items.Add(olditems[i]);
             }

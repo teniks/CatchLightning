@@ -15,7 +15,7 @@ namespace CatchLightning.features.Dashboard.Achievement.Model
             set
             {
                 title = value;
-                OnPropertyChanged(nameof(Title));
+                RaisePropertyChanged(nameof(Title));
             }
         }
 
@@ -25,7 +25,7 @@ namespace CatchLightning.features.Dashboard.Achievement.Model
             set
             {
                 description = value;
-                OnPropertyChanged(nameof(Description));
+                RaisePropertyChanged(nameof(Description));
             }
         }
 
