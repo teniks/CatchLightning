@@ -1,8 +1,11 @@
 ﻿using Avalonia.Threading;
+using CatchLightning.Core.Abstractions.Presentation;
+using CatchLightning.features.Dashboard.Achievement.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -99,6 +102,42 @@ namespace CatchLightning.features.Dashboard.NavigationPanel
             {
                 NavigationPaths = new(newPaths);
             });
+        }
+
+        public NavigationPath CreateNavPath(EntityViewModel entity, AsyncRelayCommand command)
+        {
+            return entity switch
+            {
+                CategoryViewModel category => new NavigationPath
+                {
+                    Name = category.Title,
+                    Entity = entity,
+                    LevelDepth = NavigationPath.Depth.Category,
+                    Command = command
+                },
+
+                GoalViewModel goal => new NavigationPath
+                {
+                    Name = goal.Title,
+                    Entity = entity,
+                    LevelDepth = NavigationPath.Depth.Goal,
+                    Command = command
+                }
+            };
+        }
+
+        public List<NavigationPath> GetPathsUntil(int index)
+        {
+            var olditems = NavigationPaths.ToArray();
+            List<NavigationPath> items = new();
+
+            int max = Math.Max(0, Math.Min(index, olditems.Length));
+            for (int i = 0; i < max; i++)
+            {
+                items.Add(olditems[i]);
+            }
+
+            return items;
         }
 
         public void Dispose()
