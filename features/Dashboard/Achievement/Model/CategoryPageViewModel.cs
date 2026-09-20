@@ -114,24 +114,15 @@ namespace CatchLightning.features.Dashboard.Achievement.Model
 
         private CategoryViewModel CreateViewModel(Category entity)
         {
-            CategoryViewModel category = new()
-            {
-                Id = entity.Id,
-                Title = entity.Name
-            };
-            category.Command = new RelayCommand(() => Select(category));
+            CategoryViewModel category = new(entity, null);
+            category.SetCommand(vm => new RelayCommand(() => Select(vm)));
             return category;
         }
 
         private GoalViewModel CreateViewModel(Goal entity)
         {
-            GoalViewModel goal = new()
-            {
-                Id = entity.Id,
-                Title = entity.Name,
-                Description = entity.Description
-            };
-            goal.Command = new RelayCommand(() => Select(goal));
+            GoalViewModel goal = new(entity, null);
+            goal.SetCommand(vm => new RelayCommand(() => Select(vm)));
             return goal;
         }
 

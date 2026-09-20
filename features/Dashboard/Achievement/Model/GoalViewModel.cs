@@ -1,23 +1,16 @@
 ﻿using CatchLightning.Core.Abstractions.Presentation;
+using CatchLightning.Core.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace CatchLightning.features.Dashboard.Achievement.Model
 {
-    public class GoalViewModel : EntityViewModel
+    public class GoalViewModel(Goal entity, ICommand command) 
+        : EntityViewModel(entity, command)
     {
-        private string title;
-        private string? description;
-
-        public required string Title
-        {
-            get => title;
-            set
-            {
-                title = value;
-                RaisePropertyChanged(nameof(Title));
-            }
-        }
+        private string description = entity.Description ?? string.Empty;
+        private int? categoryId = entity.CategoryId;
 
         public string? Description
         {
@@ -29,6 +22,22 @@ namespace CatchLightning.features.Dashboard.Achievement.Model
             }
         }
 
+        public int? CategoryId
+        {
+            get => categoryId;
+            set
+            {
+                categoryId = value;
+                RaisePropertyChanged(nameof(CategoryId));
+            }
+        }
+
+        // TODO: Implement achievement mapping
         public ObservableCollection<AchievementViewModel> Achievements { get; } = new();
+
+        public void SetCommand(Func<GoalViewModel, ICommand> commandFactory)
+        {
+            base.SetCommand(commandFactory);
+        }
     }
 }

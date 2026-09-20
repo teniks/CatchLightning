@@ -1,23 +1,14 @@
 ﻿using CatchLightning.Core.Abstractions.Presentation;
+using CatchLightning.Core.Models;
+using System;
 using System.Windows.Input;
 
 namespace CatchLightning.features.Dashboard.Achievement.Model
 {
-    public class CategoryViewModel : EntityViewModel
+    public class CategoryViewModel(Category entity, ICommand command) 
+        : EntityViewModel(entity, command)
     {
-        private string title;
         private bool isSelected = false;
-
-
-        public required string Title
-        {
-            get => title;
-            set
-            {
-                title = value;
-                RaisePropertyChanged(nameof(Title));
-            }
-        }
 
         public bool IsSelected
         {
@@ -27,6 +18,11 @@ namespace CatchLightning.features.Dashboard.Achievement.Model
                 isSelected = value;
                 RaisePropertyChanged(nameof(IsSelected));
             }
+        }
+
+        public void SetCommand(Func<CategoryViewModel, ICommand> commandFactory)
+        {
+            base.SetCommand(commandFactory);
         }
     }
 }
