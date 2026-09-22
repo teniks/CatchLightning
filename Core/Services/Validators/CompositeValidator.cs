@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CatchLightning.Core.Services.Validators
 {
-    internal class CompositeValidator<TEntity, TEnumErrors> : IValidator<TEntity, TEnumErrors>
+    public class CompositeValidator<TEntity, TEnumErrors> : IValidator<TEntity, TEnumErrors>
         where TEntity : class, IEntity
         where TEnumErrors : Enum
     {
@@ -21,7 +21,12 @@ namespace CatchLightning.Core.Services.Validators
         {
             foreach (var validator in _validators)
             {
-                return await validator.Validate(entity);
+                var result = await validator.Validate(entity);
+
+                if (result is null)
+                    continue;
+                else
+                    return result;
             }
 
             return default(TEnumErrors?);
