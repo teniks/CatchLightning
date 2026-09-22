@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CatchLightning.Core.Services.Validators
+namespace CatchLightning.Core.Abstractions
 {
     public interface IValidator<TEntity, TEnumErrors>
     {

@@ -1,4 +1,5 @@
-﻿using CatchLightning.Core.Infrastructure;
+﻿using CatchLightning.Core.Abstractions;
+using CatchLightning.Core.Infrastructure;
 using CatchLightning.Core.Models;
 using CatchLightning.Core.Models.Filters;
 using CatchLightning.Core.Services.Validators;
