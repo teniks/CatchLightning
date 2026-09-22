@@ -39,11 +39,6 @@ namespace CatchLightning.Core.Infrastructure
             await dbSet.AddAsync(entity);
         }
 
-        public void Update(T entity)
-        {
-            dbSet.Update(entity);
-        }
-
         public void Delete(T entity)
         {
             dbSet.Remove(entity);

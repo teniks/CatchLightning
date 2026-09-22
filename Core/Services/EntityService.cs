@@ -1,13 +1,12 @@
 ﻿using CatchLightning.Core.Abstractions;
 using CatchLightning.Core.Infrastructure;
-using CatchLightning.Core.Services.Validators;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CatchLightning.Core.Services
 {
-    public abstract class EntityService<TEntity, TEnumErrors>
+    public abstract class EntityService<TEntity, TEnumErrors> : IGetterById<TEntity>
         where TEntity : class, IEntity
         where TEnumErrors : Enum
     {
@@ -56,13 +55,21 @@ namespace CatchLightning.Core.Services
         /// Update an existing entity in the repository after validating it. <br/>
         /// If the validation fails, it returns an <see cref="OperationResult{TEnumErrors}"/> with the error.
         /// </summary>
-        public async Task<OperationResult<TEnumErrors>> UpdateAsync(TEntity entity)
+        /// <exception cref="InvalidOperationException">Entity is not exist</exception>
+        public async Task<OperationResult<TEnumErrors>> UpdateAsync(
+            int id, 
+            Action<TEntity> updateFields)
         {
+            var entity = await GetByIdAsync(id);
+            if (entity is null)
+                throw new InvalidOperationException($"{typeof(TEntity)} with id = {id} was not found.");
+
             TEnumErrors? result = await validator.Validate(entity);
             if (result != null)
                 return OperationResult<TEnumErrors>.Failure(result);
 
-            repository.Update(entity);
+            updateFields(entity);
+
             await repository.SaveChangesAsync();
             return OperationResult<TEnumErrors>.Success();
         }
