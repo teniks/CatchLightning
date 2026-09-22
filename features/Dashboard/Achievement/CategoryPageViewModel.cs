@@ -3,6 +3,7 @@ using CatchLightning.Core.Abstractions.Presentation;
 using CatchLightning.Core.Models;
 using CatchLightning.Core.Services;
 using CatchLightning.Core.Services.Validators;
+using CatchLightning.features.Dashboard.Achievement.Model;
 using CatchLightning.features.Dashboard.Model;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CatchLightning.features.Dashboard.Achievement.Model
+namespace CatchLightning.features.Dashboard.Achievement
 {
     public class CategoryPageViewModel : BaseViewModel
     {
@@ -21,10 +22,52 @@ namespace CatchLightning.features.Dashboard.Achievement.Model
         private EntityService<Goal, GoalError> _goalService;
         private readonly IMediator _mediator;
 
+        public RelayCommand CreateCategoryCommand { get; }
+        public RelayCommand DeleteCategoryCommand { get; }
+        public RelayCommand EditCategoryCommand { get; }
+        public RelayCommand LoadMoreCategoriesCommand { get; }
+        public RelayCommand LoadMoreGoalsCommand { get; }
 
-        public CategoryPageViewModel(IMediator mediator)
+        private string _newCategoryTitle = string.Empty;
+        public string NewCategoryTitle
+        {
+            get => _newCategoryTitle;
+            set
+            {
+                _newCategoryTitle = value;
+                RaisePropertyChanged(nameof(NewCategoryTitle));
+            }
+        }
+
+        public CategoryPageViewModel(IMediator mediator, EntityService<Category, CategoryError>? categoryService = null, EntityService<Goal, GoalError>? goalService = null)
         {
             _mediator = mediator;
+            _categoryService = categoryService;
+            _goalService = goalService;
+
+            CreateCategoryCommand = new RelayCommand(() => _ = CreateCategoryAsync());
+            DeleteCategoryCommand = new RelayCommand(() => _ = DeleteSelectedCategoryAsync(), () => SelectedCategory != null);
+            EditCategoryCommand = new RelayCommand(() => _ = EditSelectedCategoryAsync(), () => SelectedCategory != null);
+            LoadMoreCategoriesCommand = new RelayCommand(() => _ = LoadMoreCategories());
+            LoadMoreGoalsCommand = new RelayCommand(() => _ = LoadMoreGoals());
+        }
+
+        private object EditSelectedCategoryAsync()
+        {
+            //TODO: Implement editing selected category
+            throw new NotImplementedException();
+        }
+
+        private object DeleteSelectedCategoryAsync()
+        {
+            //TODO: Implement remove selected category
+            throw new NotImplementedException();
+        }
+
+        private object CreateCategoryAsync()
+        {
+            //TODO: Implement create a new category
+            throw new NotImplementedException();
         }
 
         public CategoryViewModel? SelectedCategory
@@ -36,6 +79,8 @@ namespace CatchLightning.features.Dashboard.Achievement.Model
 
                 _selectedCategory = value;
                 RaisePropertyChanged(nameof(SelectedCategory));
+                DeleteCategoryCommand.RaiseCanExecuteChanged();
+                EditCategoryCommand.RaiseCanExecuteChanged();
                 value?.Command.Execute(null);
             }
         }
