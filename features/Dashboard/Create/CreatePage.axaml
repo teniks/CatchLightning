@@ -1,0 +1,135 @@
+<ContentPage xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:createModel="using:CatchLightning.features.Dashboard.Create.Model"
+             xmlns:create="using:CatchLightning.features.Dashboard.Create"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="create:EditingPageViewModel"
+             x:Class="CatchLightning.features.Dashboard.Create.CreatePage"
+             x:Name="Root">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <Grid MaxWidth="620" Margin="32"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+              RowSpacing="20">
+
+            <StackPanel Grid.Row="0" Spacing="6">
+                <TextBlock Text="{Binding CurrentModeTitle}"
+                           FontSize="28"
+                           FontWeight="SemiBold"/>
+            </StackPanel>
+
+            <Grid Grid.Row="1" ColumnDefinitions="*,220" ColumnSpacing="16">
+                <StackPanel Grid.Column="0" Spacing="6">
+                    <TextBlock Text="Тип сущности"/>
+                    <ComboBox SelectedIndex="0">
+                        <ComboBoxItem Content="Задача"/>
+                        <ComboBoxItem Content="Цель"/>
+                        <ComboBoxItem Content="Категория"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <TextBlock Grid.Column="1" VerticalAlignment="Bottom"
+                           Text="* Обязательное поле"
+                           Opacity="0.6"
+                           HorizontalAlignment="Right"/>
+            </Grid>
+
+            <StackPanel Grid.Row="2" Spacing="6">
+                <TextBlock Text="Имя *"/>
+                <TextBox Text="{Binding CurrentPageEditor.Title, Mode=TwoWay}"
+                         PlaceholderText="Введите имя"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Spacing="10">
+                <TextBlock Text="Дополнительные поля"
+                           FontSize="18"
+                           FontWeight="SemiBold"/>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <ComboBox Grid.Column="0"
+                              ItemsSource="{Binding AvailableFieldToPick}"
+                              SelectedItem="{Binding SelectedField, Mode=TwoWay}"
+                              PlaceholderText="Выберите поле для добавления">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Title}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+
+                    </ComboBox>
+
+                    <Button Grid.Column="1" Content="Добавить" Padding="18 8"
+                            Command="{Binding AddFiledCommand}"/>
+                </Grid>
+                <TextBlock Text="Добавляйте только те поля, которые нужны для этой записи."
+                           FontSize="12"
+                           Opacity="0.6"/>
+            </StackPanel>
+
+            <ItemsControl  Grid.Row="4" ItemsSource="{Binding CurrentPageEditor.VisibleFields}">
+                 <ItemsControl.DataTemplates>
+
+                     <DataTemplate DataType="createModel:DescriptionFieldViewModel">
+                         <StackPanel Margin="0 0 0 12" Spacing="6">
+                             <TextBox Text="{Binding Title}"/>
+                             <TextBox Text="{Binding Value, Mode=TwoWay}"
+                                 PlaceholderText="Добавьте описание"
+                                 AcceptsReturn="True" TextWrapping="Wrap"
+                                 MinHeight="96" Margin="0 8 0 0"/>
+                         </StackPanel>
+                     </DataTemplate>
+
+                     <DataTemplate DataType="createModel:CategoryFieldViewModel">
+                         <StackPanel Margin="0 0 0 12" Spacing="6">
+                             <TextBlock Text="Категория"/>
+                            <ComboBox ItemsSource="{Binding Options}"
+                                      SelectedItem="{Binding Value}"
+                                      PlaceholderText="Не выбрана"/>
+                         </StackPanel>
+                     </DataTemplate>
+
+                     <DataTemplate DataType="createModel:GoalFieldViewModel">
+                         <StackPanel Margin="0 0 0 12" Spacing="6">
+                            <TextBlock Text="{Binding Title}"/>
+                            <ComboBox ItemsSource="{Binding Options}"
+                                      SelectedItem="{Binding Value}"
+                                      PlaceholderText="Не выбрана"/>
+                         </StackPanel>
+                     </DataTemplate>
+
+                     <DataTemplate DataType="createModel:LevelFieldViewModel">
+                         <StackPanel Margin="0 0 0 12" Spacing="6">
+                            <TextBlock Text="{Binding Title}"/>
+                             <ComboBox SelectedItem="{Binding Value}"
+                              Margin="0 8 0 0">
+                                <ComboBoxItem Content="Обычная"/>
+                                <ComboBoxItem Content="Необычная"/>
+                                <ComboBoxItem Content="Редкая"/>
+                                <ComboBoxItem Content="Эпическая"/>
+                                <ComboBoxItem Content="Легенда"/>
+                                <ComboBoxItem Content="Чемпион"/>
+                            </ComboBox>
+                         </StackPanel>
+                     </DataTemplate>
+
+                     <DataTemplate DataType="createModel:CompletionStatusFieldViewModel">
+                         <StackPanel Margin="0 0 0 12" Spacing="6">
+                            <TextBlock Text="{Binding Title}"/>
+                             <CheckBox Content="Задача выполнена"
+                                       IsChecked="{Binding Value, Mode=TwoWay}"/>
+                         </StackPanel>
+                     </DataTemplate>
+                 </ItemsControl.DataTemplates>
+            </ItemsControl>
+
+            <StackPanel Grid.Row="5" Orientation="Horizontal"
+                        HorizontalAlignment="Right" Spacing="12">
+                <Button Content="Отмена" Padding="22 10"/>
+                <Button Content="Сохранить" Padding="22 10"
+                        Classes="accent" Command="{Binding SaveCommand}"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+
+</ContentPage>
