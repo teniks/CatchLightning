@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using CatchLightning.features.Dashboard.Achievement.Model;
 
-namespace CatchLightning.features.Dashboard.Achievement.Presentation
+namespace CatchLightning.features.Dashboard.Achievement
 {
     public partial class CategoryPage : ContentPage
     {

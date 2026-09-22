@@ -2,10 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:category="using:CatchLightning.features.Dashboard.Achievement"
              xmlns:model="using:CatchLightning.features.Dashboard.Achievement.Model"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CatchLightning.features.Dashboard.Achievement.Presentation.CategoryPage"
-             x:DataType="model:CategoryPageViewModel">
+             x:Class="CatchLightning.features.Dashboard.Achievement.CategoryPage"
+             x:DataType="category:CategoryPageViewModel">
   
     <ContentPage.DataTemplates>
 
@@ -33,13 +34,16 @@
 
     <Grid RowDefinitions="Auto, *">
 
-        <ScrollViewer Grid.Row="0" 
-                      HorizontalScrollBarVisibility="Auto"
-                      VerticalScrollBarVisibility="Disabled">
-            
+        <StackPanel Grid.Row="0" Orientation="Horizontal"  Height="40" Margin="0 12">
+
             <ComboBox ItemsSource="{Binding Categories}" Width="200" Margin="12"
-                      SelectedItem="{Binding SelectedCategory}"/>
-        </ScrollViewer>
+                      SelectedItem="{Binding SelectedCategory}" VerticalAlignment="Stretch"/>
+
+            <Button Classes="goal-tile" Margin="12"
+                    VerticalAlignment="Stretch"
+                    Content="Создать"
+                    Command="{Binding CreateCategoryCommand}"/>
+        </StackPanel>
 
         <ScrollViewer Grid.Row="1">
             <ItemsControl ItemsSource="{Binding Goals}" Margin="12">
